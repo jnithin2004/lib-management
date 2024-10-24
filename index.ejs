@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Library Management System</title>
+</head>
+<body>
+    <h1>Library Management System</h1>
+    
+    <form action="/add-book" method="POST" class="book-form">
+        <input type="text" name="bookName" placeholder="Book Name" required>
+        <input type="text" name="author" placeholder="Author" required>
+        <input type="text" name="genre" placeholder="Genre" required>
+        <input type="date" name="date" required>
+        <button type="submit">Add Book</button>
+    </form>
+
+    <div class="book-list">
+        <h2>Books in Library</h2>
+        <ul>
+            <% books.forEach(book => { %>
+                <li>
+                    <strong><%= book.bookName %></strong> by <%= book.author %> (<%= book.genre %>, <%= book.date.toDateString() %>)
+                    <form action="/remove-book" method="POST" style="display:inline;">
+                        <input type="hidden" name="bookId" value="<%= book._id %>">
+                        <button type="submit">Remove</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+    <script src="/js/scripts.js"></script>
+</body>
+</html>
